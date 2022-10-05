@@ -1,0 +1,42 @@
+section.login-section.hidden
+    .row
+        .login
+            .login__form
+                form.form.form-login
+                    .u-margin-bottom-medium
+                        h3.heading-tertiary welcome back
+                        h2.heading-secondary Log into your account
+                    .form__fields
+                        // <h3 class="hint">E-Mail or Username</h3>
+                        input#loginEmail.form__input(type='email', placeholder='E-mail', required='')
+                        label.form__label(for='E-mail') E-mail
+                    .form__fields
+                        a.forget_pass(href='/request-password-reset') Forget password?
+                        input#loginPassword.form__input(type='password', placeholder='Password', required='')
+                        label.form__label(for='Password') Password
+                    .form__fields
+                        button.btn.btn--blue Login now
+section.signup-section.hidden
+    .row
+        .signup
+            .signup__form
+                form.form.form-signup
+                    .u-margin-bottom-medium
+                        h3.heading-tertiary welcome
+                        h2.heading-secondary Sign up for account
+                    .form__fields
+                        // <h3 class="hint">E-Mail or Username</h3>
+                        input#signupEmail.form__input(type='email', placeholder='E-mail', required='')
+                        label.form__label(for='E-mail') E-mail
+                    .form__fields
+                        input#signupName.form__input(type='text', placeholder='Username', required='')
+                        label.form__label(for='User_name') Username
+                    .form__fields
+                        input#signupPassword.form__input(type='password', placeholder='Password', required='')
+                        label.form__label(for='Password') Password
+                    .form__fields
+                        input#signupPasswordConfirm.form__input(type='password', placeholder='Confirm Password', required='')
+                        label.form__label(for='C-Password') Confirm Password
+                    .form__fields
+                        button.btn.btn--blue Register now
+.overlay.hidden

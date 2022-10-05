@@ -1,0 +1,50 @@
+.navigation
+    nav.navigation__nav
+        .navigation__logo
+            img.logo(src='/img/logo.png', alt='logo')
+            a.navigation__link.navigation__logo-text(href='/') Watcher
+        ul.navigation__list
+            if user
+                li.navigation__item.menu
+                    img.loggedin-img(src=`/img/users/${user.photo}` alt="User Photo")
+                    p= user.name.split(' ')[0]
+                    i.fa-solid.fa-chevron-down
+                    ul.dropdown
+                        li.navigation__item
+                            a.navigation__link(href='/me') Profile
+                        li.navigation__item
+                            a.navigation__link(href='/watchlist') Watchlist
+                        li.navigation__item
+                            a.navigation__link(href='/watched') Watched    
+                li.navigation__item
+                    a.navigation__link(href='/films') FILMS
+                li.navigation__item
+                    a.navigation__link(href='/recommendations') Recommendations
+                li.navigation__item
+                    a.navigation__link.logout-btn(href='/') LOGOUT
+            else    
+                li.navigation__item
+                    a.navigation__link.login-btn(href='#') SIGN IN
+                li.navigation__item
+                    a.navigation__link.signup-btn(href='#') CREATE ACCOUNT
+                li.navigation__item
+                    a.navigation__link(href='/films') FILMS  
+                li.navigation__item
+                    a.navigation__link(href='/recommendations') Recommendations
+        form.search(action='#')
+            input.search__input(type='search', name='search', autocomplete='off')
+            button.search__button
+                svg.search__icon
+                    use(xlink:href='/img/sprite.svg#icon-search')
+            .search-list.hidden
+                // list here
+                //
+                    <div class = "search-list-item">
+                    <div class = "search-item-thumbnail">
+                    <img src = "medium-cover.jpg">
+                    </div>
+                    <div class = "search-item-info">
+                    <h3>Guardians of the Galaxy Vol. 2</h3>
+                    <p>2017</p>
+                    </div>
+                    </div>

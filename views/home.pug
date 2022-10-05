@@ -1,0 +1,77 @@
+extends base
+
+block header
+    include _header
+block content
+    section.cta
+        h1.heading-primary Track films you&rsquo;ve watched.
+        h1.heading-primary Save those you want to see.
+        h1.heading-primary Tell your friends what&rsquo;s good.
+        a.create-account-link(href='#') Get started &mdash; it&lsquo;s free!
+    section.featured
+        ul.featured__list
+            .featured__wrapper
+                a.featured__link(href='#')
+                    li.featured__item
+                        div
+                            img.featured__img(src='/img/batman.jpg')
+                a.featured__link(href='#')   
+                    li.featured__item
+                        div
+                            img.featured__img(src='/img/yang.jpg')
+                a.featured__link(href='#')   
+                    li.featured__item
+                        div
+                            img.featured__img(src='/img/fresh.jpg')
+            .featured__wrapper
+                a.featured__link(href='#') 
+                    li.featured__item
+                        div
+                            img.featured__img(src='/img/cyrano.jpg')
+                a.featured__link(href='#')     
+                    li.featured__item
+                        div
+                            img.featured__img(src='/img/freedom.jpg')
+                a.featured__link(href='#')     
+                    li.featured__item
+                        div
+                            img.featured__img(src='/img/kimi.jpg')
+    section.highlights
+        .highlights__list
+            .panel
+                svg.icon
+                    use(xlink:href='img/sprite.svg#icon-eye')
+                p
+                    | Keep track of every film you&rsquo;ve ever watched (or just start from the
+                    | day you&nbsp;join)
+            .panel
+                svg.icon
+                    use(xlink:href='img/sprite.svg#icon-heart')
+                p
+                    | Show some love for your favorite films, lists and reviews with
+                    | a&nbsp;&ldquo;like&rdquo;
+            .panel
+                svg.icon
+                    use(xlink:href='img/sprite.svg#icon-paragraph-left')
+                p
+                    | Write and share reviews, and follow friends and other members to
+                    | read&nbsp;theirs
+            .panel
+                svg.icon
+                    use(xlink:href='img/sprite.svg#icon-star-full')
+                p
+                    | Rate each film on a five-star scale (with halves) to record and
+                    | share your&nbsp;reaction
+            .panel
+                svg.icon
+                    use(xlink:href='img/sprite.svg#icon-calendar')
+                p
+                    | Keep a diary of your film watching (and upgrade to
+                    strong Pro
+                    | &nbsp;for comprehensive stats)
+            .panel
+                svg.icon
+                    use(xlink:href='img/sprite.svg#icon-list2')
+                p
+                    | Compile and share lists of films on any topic and keep a watchlist
+                    | of films to&nbsp;see

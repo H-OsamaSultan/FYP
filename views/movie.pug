@@ -1,0 +1,174 @@
+extends base
+
+block header
+    include _header
+    //- -console.log('mydata', movie);
+
+mixin rating()
+    .rating-group(data-rate=`${JSON.stringify(rating)}`)
+        label.rating__label.rating--none(aria-label='0 stars', for='rating-0')
+            i.fa.fa-close
+        .rating-stars    
+            input#rating-0.rating__input.rating__input--none(checked name='rating2', value='0', type='radio')
+
+            label.rating__label.rating__label--half(aria-label='0.5 stars', for='rating-1')
+                i.rating__icon.rating__icon--star.fa.fa-star-half
+            input#rating-1.rating__input(name='rating2', value='1', type='radio')
+
+            label.rating__label(aria-label='1 star', for='rating-2')
+                i.rating__icon.rating__icon--star.fa.fa-star
+            input#rating-2.rating__input(name='rating2', value='2', type='radio')
+
+            label.rating__label.rating__label--half(aria-label='1.5 stars', for='rating-3')
+                i.rating__icon.rating__icon--star.fa.fa-star-half
+            input#rating-3.rating__input(name='rating2', value='3', type='radio')
+
+            label.rating__label(aria-label='2 stars', for='rating-4')
+                i.rating__icon.rating__icon--star.fa.fa-star
+            input#rating-4.rating__input(name='rating2', value='4', type='radio')
+
+            label.rating__label.rating__label--half(aria-label='2.5 stars', for='rating-5')
+                i.rating__icon.rating__icon--star.fa.fa-star-half
+            input#rating-5.rating__input(name='rating2', value='5', type='radio')
+
+            label.rating__label(aria-label='3 stars', for='rating-6')
+                i.rating__icon.rating__icon--star.fa.fa-star
+            input#rating-6.rating__input(name='rating2', value='6', type='radio')
+
+            label.rating__label.rating__label--half(aria-label='3.5 stars', for='rating-7')
+                i.rating__icon.rating__icon--star.fa.fa-star-half
+            input#rating-7.rating__input(name='rating2', value='7', type='radio')
+
+            label.rating__label(aria-label='4 stars', for='rating-8')
+                i.rating__icon.rating__icon--star.fa.fa-star
+            input#rating-8.rating__input(name='rating2', value='8', type='radio')
+
+            label.rating__label.rating__label--half(aria-label='4.5 stars', for='rating-9')
+                i.rating__icon.rating__icon--star.fa.fa-star-half
+            input#rating-9.rating__input(name='rating2', value='9', type='radio')
+
+            label.rating__label(aria-label='5 stars', for='rating-10')
+                i.rating__icon.rating__icon--star.fa.fa-star
+            input#rating-10.rating__input(name='rating2', value='10', type='radio')
+
+block content
+    section.details(data-movieid=`${JSON.stringify(movieData.id)}`)
+        .film__poster
+            img.poster__img(src=`https://image.tmdb.org/t/p/original${movieData.poster_path}`, alt='Poster')
+        .trailer
+            .actions
+                .action__trailer
+                    a.trailer-btn Watch Trailer   
+        .film__details
+            .film__header(data-movieBackdrop=`https://image.tmdb.org/t/p/w1280${movieData.backdrop_path}`)
+                h1.film__name #{movieData.title}
+                p.film__desc
+                    -const releaseDate = movieData.release_date.split('-')[0];
+                    small.number #{releaseDate}
+                    Directed by
+                    for crew in movieCredits.crew 
+                        if(crew.job==="Director")
+                            span.director #{crew.original_name}
+            .film__plot
+                p
+                    | #{movieData.overview}
+            .film__cast
+                h2 CAST
+                .cast__list
+                    for cast,i in movieCredits.cast.slice(0,20)
+                        a.cast__name #{cast.original_name}
+        if user
+            .actions__panel
+                .actions
+                    .action__watch
+                        .watched
+                            if(movie && movie.watched)
+                                svg.icon.icon-watched.fill
+                                    use(xlink:href='/img/sprite.svg#icon-eye')
+                                p.watched-para Watched       
+                            else    
+                                svg.icon.icon-watched
+                                    use(xlink:href='/img/sprite.svg#icon-eye')
+                                p.watched-para Watch
+                        .liked
+                            if(movie && movie.liked)
+                                svg.icon.icon-liked.fill
+                                    use(xlink:href='/img/sprite.svg#icon-star-full')
+                            else 
+                                svg.icon.icon-liked
+                                    use(xlink:href='/img/sprite.svg#icon-star-full')        
+                            p Like
+                        .watchlist
+                            if(movie && movie.watchlist)
+                                svg.icon.icon-watchlist.fill
+                                    use(xlink:href='/img/sprite.svg#icon-time')
+                            else 
+                                svg.icon.icon-watchlist
+                                    use(xlink:href='/img/sprite.svg#icon-time')        
+                            p Watchlist
+                    .action__rate
+                        p Rate
+                        if rating
+                            +rating
+                        else
+                            +rating    
+                        
+                    .action__review
+                        a.review__btn(href='#') Review
+        else               
+            .actions__panel.small
+                    .actions
+                        .action__login
+                            a.login-btn.log-review__btn Login to rate or review movie                
+        if reviews.length > 0 && user    
+            .reviews
+                h2 Reviews
+                for review in reviews
+                    -console.log("fff",review);
+                    -console.log("current ",user._id);
+                    -console.log("review ",review.user._id); 
+                    -if(`${user._id}` == `${review.user._id}`)
+                        .review
+                            img.review__avatar(src=`/img/users/${review.user.photo}`, alt='avatar')
+                            .review__details
+                                .review__by Review by 
+                                    span.review-user #{review.user.name}
+                                .review__text #{review.review}
+                            i.fa-solid.fa-pen-to-square.fa-2x.edit-btn
+                    -else 
+                        .review
+                            img.review__avatar(src=`/img/users/${review.user.photo}`, alt='avatar')
+                            .review__details
+                                .review__by Review by 
+                                    span.review-user #{review.user.name}
+                                .review__text #{review.review}         
+        else       
+            .reviews
+                h2 No reviews for this film yet              
+    section.review-section.hidden
+        .review-container
+            .create__review
+                .rev-align
+                    .movie
+                        .review__poster
+                            img.poster__img(src=`https://image.tmdb.org/t/p/original/${movieData.poster_path}`, alt='movie-image')
+                    .create__review__form
+                        .rev-align
+                            .holder
+                                h2.rev__heading-tertiary I &nbsp;watched
+                                .rev-align
+                                    h2.rev__heading-secondary #{movieData.title}
+                                    h2.rev__heading-tertiary #{releaseDate}
+                        form.reviewForm
+                            .reviewForm__fields
+                                textarea#text_area.reviewForm__re-textArea(placeholder='Add a review', rows='5')
+                            .form__button.right
+                                button.Rev_btn.Rev_btn--Dgreen save
+                            console.log(movieTrailer.results)  
+                
+    .trailer-video.hidden
+        if movieTrailer.results[0]
+            iframe(width='1280', height='720', src=`https://www.youtube.com/embed/${movieTrailer.results[0].key}`)                        
+        -else 
+            iframe(width='1280', height='720', src=`https://www.youtube.com/embed/error`)  
+    .overlay.hidden   

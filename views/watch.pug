@@ -1,0 +1,16 @@
+extends base
+
+block header
+    include _navigation
+block content
+    section.recommendations
+        .heading-primary
+            if(watchlist)
+                p Watchlist
+            else if(watched)
+                p Watched    
+        .film__list
+            -for(let i=0; i<movies.length; i++)
+                a(href=`/movie/${movies[i].movieID}`)
+                    .film__item
+                        img.film__img(src=`https://image.tmdb.org/t/p/original/${moviePosters[i].file_path}`)

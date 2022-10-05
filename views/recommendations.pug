@@ -1,0 +1,14 @@
+extends base
+
+block header
+    include _navigation
+
+block content
+    .movie-filter-container
+        p Search:
+        form.search.search-rec(action='#')
+            input.search-term-input.search__input-rec(type='search', name='search', autocomplete='off')
+            button.search__button.rec-btn           
+            .search-list-rec.hidden 
+    section.recommendations
+        .film__list        
